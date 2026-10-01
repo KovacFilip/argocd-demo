@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plain-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/KovacFilip/argocd-demo
+    targetRevision: HEAD
+    path: plain
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: plain-demo
+  # No "automated" block -> sync is triggered manually from the UI/CLI
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

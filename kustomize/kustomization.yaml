@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namePrefix: kustomize-
+
+labels:
+  - pairs:
+      demo: kustomize
+
+replicas:
+  - name: nginx
+    count: 2
+
+images:
+  - name: nginx
+    newTag: 1.27-alpine
+
+resources:
+  - deployment.yaml
+  - service.yaml
